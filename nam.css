@@ -1,0 +1,586 @@
+/* --- Global Reset & Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap');
+
+:root {
+    --primary-color: #6366f1; /* Indigo modern */
+    --accent-color: #f43f5e;  /* Rose accent */
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: 'Prompt', sans-serif;
+    color: var(--text-main);
+    overflow-x: hidden;
+}
+
+/* --- Loader สวยๆ --- */
+#loader-wrapper {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #fff;
+    display: flex; justify-content: center; align-items: center;
+    z-index: 9999;
+}
+#loader {
+    width: 50px; height: 50px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* --- Navigation Bar --- */
+.navbar {
+    background: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 1rem 2rem;
+}
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--primary-color) !important;
+    font-size: 1.5rem;
+}
+.nav-link {
+    font-weight: 400;
+    color: var(--text-main) !important;
+    margin-left: 20px;
+    position: relative;
+}
+.nav-link::after {
+    content: '';
+    position: absolute; width: 0; height: 2px;
+    bottom: 0; left: 0; background: var(--primary-color);
+    transition: var(--transition);
+}
+.nav-link:hover::after { width: 100%; }
+
+/* --- Hero Section --- */
+.tm-hero {
+    height: 40vh;
+    background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+    background-size: cover;
+    margin-bottom: 50px;
+    border-radius: 0 0 50px 50px;
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+}
+
+/* --- Gallery Typography --- */
+.tm-text-primary {
+    color: var(--text-main) !important;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 10px;
+}
+.tm-text-primary::before {
+    content: "";
+    position: absolute; bottom: 0; left: 0;
+    width: 50px; height: 4px;
+    background: var(--primary-color);
+    border-radius: 2px;
+}
+
+/* --- Gallery Cards (The Magic) --- */
+.tm-gallery .col-xl-3 {
+    perspective: 1000px;
+}
+
+.tm-video-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    transition: var(--transition);
+    background: #000;
+}
+
+.tm-video-item img {
+    transition: var(--transition);
+    object-fit: cover;
+    height: 250px;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.tm-video-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.tm-video-item:hover img {
+    transform: scale(1.1);
+    opacity: 0.6;
+}
+
+/* Overlay Effect */
+figcaption {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    padding: 2rem;
+    color: #fff;
+    opacity: 0;
+    transition: var(--transition);
+    z-index: 1;
+}
+
+.tm-video-item:hover figcaption {
+    opacity: 1;
+}
+
+figcaption h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    transform: translateY(20px);
+    transition: var(--transition);
+}
+
+.tm-video-item:hover h2 {
+    transform: translateY(0);
+}
+
+figcaption a {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    text-indent: -9999px;
+}
+
+/* Info Section below image */
+.tm-text-gray {
+    padding-top: 15px;
+    font-size: 0.85rem;
+}
+.tm-text-gray-light {
+    color: var(--text-muted);
+}
+.tm-text-gray span:last-child {
+    background: #e2e8f0;
+    padding: 2px 10px;
+    border-radius: 20px;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* --- Pagination Input --- */
+.tm-input-paging {
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 5px 10px;
+    width: 60px;
+    text-align: center;
+    outline: none;
+    transition: var(--transition);
+}
+.tm-input-paging:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .tm-hero { height: 25vh; border-radius: 0 0 30px 30px; }
+    .navbar { padding: 1rem; }
+}
+/* สไตล์พื้นฐานของปุ่ม */
+.btn {
+    padding: 12px 30px;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* ปุ่มย้อนกลับ และ ปุ่มถัดไป */
+.tm-btn-prev, .tm-btn-next {
+    background-color: transparent;
+    color: #0099cc;
+    border: 2px solid #0099cc;
+}
+
+.tm-btn-prev:hover, .tm-btn-next:hover {
+    background-color: #0099cc;
+    color: white;
+}
+
+/* ปุ่มกลับหน้าหลัก (เน้นให้เด่นขึ้น) */
+.tm-btn-home {
+    background-color: #0099cc;
+    color: white;
+    border: 2px solid #0099cc;
+}
+
+.tm-btn-home:hover {
+    background-color: #006699;
+    border-color: #006699;
+    color: white;
+}
+
+/* จัดระยะห่างสำหรับมือถือ */
+@media (max-width: 576px) {
+    .btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+}
+/* พื้นฐานการจัดกลุ่มปุ่ม */
+.tm-pagination-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+/* สไตล์รวมของทุกปุ่ม */
+.btn-custom {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 28px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 50px; /* ทรงมนยาวดูหรู */
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    border: none;
+    letter-spacing: 0.5px;
+}
+
+/* ปุ่มย้อนกลับและถัดไป (โทนขาวใส-เรียบหรู) */
+.tm-btn-prev, .tm-btn-next {
+    background: rgba(255, 255, 255, 0.9);
+    color: #555;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* ปุ่มกลับหน้าหลัก (สีน้ำเงินพรีเมียม) */
+.tm-btn-home {
+    background: linear-gradient(135deg, #0099cc 0%, #006699 100%);
+    color: white;
+    box-shadow: 0 8px 20px rgba(0, 153, 204, 0.3);
+}
+
+/* เอฟเฟกต์เมื่อ Hover (เอาเมาส์วาง) */
+.btn-custom:hover {
+    transform: translateY(-3px); /* ลอยขึ้นเล็กน้อย */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+}
+
+.tm-btn-home:hover {
+    box-shadow: 0 12px 25px rgba(0, 153, 204, 0.4);
+    filter: brightness(1.1);
+}
+
+/* เอฟเฟกต์แสงวิ่งผ่านปุ่ม (Shine Effect) */
+.btn-custom::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: 0.5s;
+}
+
+.btn-custom:hover::after {
+    left: 100%;
+}
+/* คอนเทนเนอร์จัดวางปุ่ม */
+.tm-pagination-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 50px 0;
+}
+
+/* สไตล์พื้นฐานของปุ่ม (เน้นความมนและเรียบหรู) */
+.btn-custom {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 50px; /* ทรงแคปซูล */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none !important;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ปุ่มย้อนกลับ และ ถัดไป (สีขาวโปร่งแสงดูสะอาดตา) */
+.tm-btn-prev, .tm-btn-next {
+    background: rgba(255, 255, 255, 0.8);
+    color: #0099cc;
+    border: 1px solid rgba(0, 153, 204, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.tm-btn-prev:hover, .tm-btn-next:hover {
+    background: #0099cc;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 153, 204, 0.3);
+}
+
+/* ปุ่มกลับหน้าหลัก (สีฟ้าไล่เฉดดูพรีเมียม) */
+.tm-btn-home {
+    background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);
+    color: white;
+    box-shadow: 0 8px 20px rgba(0, 131, 176, 0.3);
+}
+
+.tm-btn-home:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(0, 131, 176, 0.4);
+}
+
+/* เอฟเฟกต์แสงเงาวิ่งผ่านปุ่มตอน Hover */
+.btn-custom::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: all 0.6s;
+}
+
+.btn-custom:hover::before {
+    left: 100%;
+}
+/* 1. พื้นหลังหลักของหน้าเว็บแบบไล่เฉดสีฟ้าอ่อนและละมุน */
+body {
+    background: linear-gradient(135deg, #e0f2f7 0%, #b3e5fc 100%);
+    background-attachment: fixed;
+    font-family: 'Prompt', sans-serif; /* แนะนำฟอนต์ไทยที่ดูทันสมัย */
+    color: #333;
+}
+
+/* 2. สร้างเลเยอร์เบลอๆ (Frosted Glass) ครอบเนื้อหาเพื่อให้ตัวหนังสือเด่น */
+.tm-container-content {
+    background: rgba(255, 255, 255, 0.4); /* สีขาวโปร่งแสง */
+    backdrop-filter: blur(15px); /* ทำให้พื้นหลังเบลอ */
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 30px;
+    padding: 40px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+/* 3. ตกแต่งหัวข้อให้เด่นชัด (สีฟ้าเข้มมีมิติ) */
+.tm-text-primary {
+    color: #0077b6 !important;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.8);
+}
+
+/* 4. ปรับแต่งการ์ดรูปภาพให้ดูแพง */
+.tm-video-item {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.4s ease;
+}
+
+.tm-video-item:hover {
+    transform: translateY(-10px);
+}
+
+/* 5. ปรับแต่งแถบเมนู (Navbar) ให้เข้ากับโทน */
+.navbar {
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+/* ตั้งค่าตำแหน่งสติกเกอร์ */
+.krathong-sticker {
+    position: fixed;
+    bottom: 50px; /* ระยะห่างจากด้านล่าง */
+    left: -150px; /* เริ่มต้นที่นอกจอทางซ้าย */
+    width: 100px;  /* ขนาดของกระทง */
+    z-index: 9999; /* ให้อยู่บนสุด */
+    pointer-events: none; /* ไม่ให้รบกวนการคลิกปุ่มอื่นๆ */
+}
+
+.krathong-sticker img {
+    width: 100%;
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3)); /* เพิ่มเงาให้ดูมีมิติ */
+}
+
+/* สร้างคำสั่งการเคลื่อนที่ (Animation) */
+@keyframes floatRight {
+    0% {
+        left: -150px; /* จุดเริ่มนอกจอซ้าย */
+        transform: translateY(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-10px) rotate(5deg); /* ขยับขึ้นและเอียงเหมือนลอยน้ำ */
+    }
+    50% {
+        transform: translateY(0) rotate(-5deg);
+    }
+    75% {
+        transform: translateY(-10px) rotate(5deg);
+    }
+    100% {
+        left: 100%; /* ไปจนถึงขวาสุดของจอ */
+        transform: translateY(0) rotate(0deg);
+    }
+}
+
+/* สั่งให้แอนิเมชันทำงาน */
+.krathong-sticker {
+    animation: floatRight 15s linear infinite; /* วิ่ง 15 วินาที, ความเร็วคงที่, วนซ้ำ */
+}
+/* ตั้งค่ากล่องคลุมโคมลอยให้อยู่เต็มหน้าจอและไม่บังการคลิก */
+.lantern-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* สำคัญมาก! ทำให้ผู้ใช้ยังคลิกปุ่มหรือรูปภาพด้านหลังได้ */
+  z-index: 9999; /* ให้อยู่เลเยอร์บนสุด */
+  overflow: hidden; /* ไม่ให้โคมลอยที่ล้นขอบทำให้หน้าจอมี Scroll bar */
+}
+
+/* สร้างรูปทรงโคมลอย (ขนาดเล็ก) และแสงเรืองรอง */
+.lantern {
+  position: absolute;
+  bottom: -50px; /* เริ่มต้นซ่อนอยู่ด้านล่างจอ */
+  width: 12px;
+  height: 18px;
+  background: radial-gradient(circle at 50% 70%, #fffbd6, #ffb300); /* ไล่สีให้เหมือนไฟ */
+  border-radius: 50% 50% 40% 40%;
+  box-shadow: 0 0 10px #ff6a00, 0 5px 15px #ff0000; /* เอฟเฟกต์แสงกระจาย */
+  opacity: 0;
+  animation: floatUp infinite ease-in; /* เรียกใช้ Animation */
+}
+
+/* ตั้งค่าให้แต่ละดวงลอยขึ้นมาในเวลา ตำแหน่ง และขนาดที่ต่างกัน ดูเป็นธรรมชาติ */
+.lantern:nth-child(1) { left: 10%; animation-duration: 12s; animation-delay: 0s; transform: scale(0.8); }
+.lantern:nth-child(2) { left: 25%; animation-duration: 15s; animation-delay: 3s; transform: scale(1.1); }
+.lantern:nth-child(3) { left: 40%; animation-duration: 10s; animation-delay: 1s; transform: scale(0.9); }
+.lantern:nth-child(4) { left: 55%; animation-duration: 18s; animation-delay: 5s; transform: scale(1.2); }
+.lantern:nth-child(5) { left: 70%; animation-duration: 14s; animation-delay: 2s; transform: scale(0.7); }
+.lantern:nth-child(6) { left: 85%; animation-duration: 11s; animation-delay: 6s; transform: scale(1); }
+.lantern:nth-child(7) { left: 30%; animation-duration: 16s; animation-delay: 8s; transform: scale(0.6); }
+.lantern:nth-child(8) { left: 80%; animation-duration: 13s; animation-delay: 4s; transform: scale(0.9); }
+
+/* Animation การลอยขึ้นและส่ายไปมา */
+@keyframes floatUp {
+  0% {
+    bottom: -50px;
+    margin-left: 0;
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.8; /* สว่างขึ้นตอนเริ่มลอย */
+  }
+  50% {
+    margin-left: 30px; /* ส่ายไปทางขวา */
+  }
+  85% {
+    opacity: 0.8;
+  }
+  100% {
+    bottom: 110vh; /* ลอยทะลุขอบจอด้านบนไปเลย */
+    margin-left: -30px; /* ส่ายไปทางซ้าย */
+    opacity: 0; /* ค่อยๆ จางหาย */
+  }
+}
+.lantern-container {
+  position: fixed !important; /* ใช้ fixed เพื่อให้อิงกับหน้าจอ Browser ไม่ใช่อิงกับโฟลเดอร์หรือ div */
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important; /* เต็มความกว้างหน้าจอ */
+  height: 100vh !important; /* เต็มความสูงหน้าจอ */
+  pointer-events: none;
+  z-index: 99999 !important; /* ดันให้อยู่เลเยอร์หน้าสุด */
+  overflow: visible !important; /* ยอมให้โคมลอยออกนอกเขตได้ถ้าจำเป็น */
+}
+
+@keyframes floatUp {
+  0% {
+    bottom: -50px; /* เริ่มจากใต้จอ */
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    /* ปรับค่านี้ให้มั่นใจว่าพ้นขอบบน */
+    bottom: 120vh; 
+    opacity: 0;
+  }
+}
+.lantern {
+  position: absolute;
+  bottom: -60px; 
+  /* ปรับขนาดให้เป็นขนาดกลาง */
+  width: 35px; 
+  height: 50px;
+  
+  /* ไล่สีให้ดูมีมิติโคมกระดาษมากขึ้น */
+  background: linear-gradient(to bottom, #ffeb3b, #ff9800, #f44336);
+  border-radius: 8px 8px 15px 15px; /* ทรงสี่เหลี่ยมโค้งมนแบบโคมลอย */
+  
+  /* เพิ่มรัศมีแสงไฟให้กว้างขึ้นตามขนาดโคม */
+  box-shadow: 0 0 25px rgba(255, 165, 0, 0.7), 0 10px 40px rgba(255, 69, 0, 0.4);
+  
+  opacity: 0;
+  animation: floatUp infinite ease-in;
+}
+
+/* เพิ่มส่วนหัวโคมให้ดูสมจริง (Optional) */
+.lantern::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 5%;
+  width: 90%;
+  height: 10%;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 5px 5px 0 0;
+}
+/* ดวงที่ 1 - ขนาดปกติ */
+.lantern:nth-child(1) { left: 10%; animation-duration: 18s; animation-delay: 0s; transform: scale(1); }
+/* ดวงที่ 2 - ขนาดใหญ่ขึ้นนิดหน่อย */
+.lantern:nth-child(2) { left: 25%; animation-duration: 22s; animation-delay: 4s; transform: scale(1.3); }
+/* ดวงที่ 3 - ขนาดกลาง */
+.lantern:nth-child(3) { left: 45%; animation-duration: 20s; animation-delay: 2s; transform: scale(1.1); }
+/* ดวงที่ 4 - ขนาดใหญ่เด่น */
+.lantern:nth-child(4) { left: 65%; animation-duration: 25s; animation-delay: 7s; transform: scale(1.4); }
+/* ดวงที่ 5 - ขนาดกลางค่อนไปทางเล็ก */
+.lantern:nth-child(5) { left: 85%; animation-duration: 19s; animation-delay: 3s; transform: scale(0.9); }
+
+.tm-container-content {
+    background: rgba(255, 255, 255, 0.05); /* ปรับให้ขาวแค่ 5% จะดูเป็นกระจกมืดๆ หรูมาก */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1); /* ขอบจางๆ */
+    /* ... ส่วนอื่นคงเดิม ... */
+}
